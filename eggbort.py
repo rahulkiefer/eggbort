@@ -79,7 +79,7 @@ for filename in os.listdir('./cogs'):
 
 ################################################################################
 
-bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.XwQUGA.N-0f19LrpchJDYzC5IjDbLse9CE')
+bot.run(TOKEN)
 
 # TODO
 # Voice ideas:
@@ -89,3 +89,4 @@ bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.XwQUGA.N-0f19LrpchJDYzC5IjDbLse9CE')
 # The Rats birthday song
 
 # move a user into a channel and play loud noise
+# music capability in general
