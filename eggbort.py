@@ -6,6 +6,7 @@ import json
 # Discord library imports
 import discord
 from discord.ext import commands
+from eggbort_token import eggbort_token
 
 # Note: egg! is now the default (and permanent) prefix
 # whenever a serverprefix is added/changed, egg! is still be available
@@ -79,7 +80,7 @@ for filename in os.listdir('./cogs'):
 
 ################################################################################
 
-bot.run(TOKEN)
+bot.run(eggbort_token())
 
 # TODO
 # Voice ideas:
