@@ -13,7 +13,7 @@ def user_is_me(ctx):
 
 def retreieve_prefix(bot, message):
   """Returns server prefix for current server on bot startup"""
-  
+
   with open('./prefixes/server_prefixes.json') as f:
     server_prefixes = json.load(f)
 
@@ -75,7 +75,7 @@ for filename in os.listdir('./cogs'):
 
 ################################################################################
 
-bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.Xv-phg.yNZ5qe0VMMVGPimzcGOGH4by1UY')
+bot.run(token)
 
 # TODO
 # Voice ideas:
