@@ -79,7 +79,7 @@ for filename in os.listdir('./cogs'):
 
 ################################################################################
 
-bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.XwPTPg.rIPCClpHOHblLt-XFQx94L6q_XI')
+bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.XwQUGA.N-0f19LrpchJDYzC5IjDbLse9CE')
 
 # TODO
 # Voice ideas:
