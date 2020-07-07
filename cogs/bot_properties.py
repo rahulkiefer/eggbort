@@ -3,6 +3,7 @@ import json
 import discord
 from discord.ext import commands
 
+
 class BotProperties(commands.Cog):
   """
   Events/commands related to monitoring/altering the bot's properties.
@@ -21,20 +22,20 @@ class BotProperties(commands.Cog):
     await self.bot.change_presence(
       status = discord.Status.online,
       activity = discord.Activity(
-        type = discord.ActivityType.watching,
-        name = 'you closely'
+        type = discord.ActivityType.playing,
+        name = 'egg!help'
       )
     )
     print('Bot is ready.')  # for debugging purposes
 
   @commands.Cog.listener()
   async def on_guild_join(self, guild):
-    """Adds the '-' server prefix upon joining a server."""
+    """Adds the 'egg!' server prefix upon joining a server."""
 
     with open('./prefixes/server_prefixes.json', 'r') as f:
       server_prefixes = json.load(f)
 
-    server_prefixes[str(guild.id)] =  '-'  # default bot prefix
+    server_prefixes[str(guild.id)] = 'egg!'  # default bot prefix
 
     with open('./prefixes/server_prefixes.json', 'w') as f:
       json.dump(server_prefixes, f, indent=4)

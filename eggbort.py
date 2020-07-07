@@ -7,20 +7,24 @@ import json
 import discord
 from discord.ext import commands
 
+# Note: egg! is now the default (and permanent) prefix
+# whenever a serverprefix is added/changed, egg! is still be available
+
 def user_is_me(ctx):
   """Checks if I am the user who gave the command."""
   return ctx.message.author.id == 220377491926286337
 
-def retreieve_prefix(bot, message):
+def retrieve_prefix(bot, message):
   """Returns server prefix for current server on bot startup"""
 
   with open('./prefixes/server_prefixes.json') as f:
     server_prefixes = json.load(f)
 
-  return server_prefixes[str(message.guild.id)]
+  return ('egg!', server_prefixes[str(message.guild.id)])
 
 
-bot = commands.Bot(command_prefix=retreieve_prefix)
+bot = commands.Bot(command_prefix=retrieve_prefix)
+
 
 ##### EVENTS ###################################################################
 
@@ -75,7 +79,7 @@ for filename in os.listdir('./cogs'):
 
 ################################################################################
 
-bot.run(token)
+bot.run('NzI4NzA3Mjc3NDg5NTY5OTAy.XwPTPg.rIPCClpHOHblLt-XFQx94L6q_XI')
 
 # TODO
 # Voice ideas:
