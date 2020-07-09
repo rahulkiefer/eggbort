@@ -6,7 +6,7 @@ import json
 # Discord library imports
 import discord
 from discord.ext import commands
-from eggbort_token import eggbort_token
+import eggbort_token
 
 # My file imports
 import file_paths
@@ -76,14 +76,14 @@ async def reload(ctx, extension):
   print('{} was reloaded'.format(extension))
 
 # Loads all extensions (Cogs)
-for filename in os.listdir('./eggbort/cogs'):
+for filename in os.listdir('eggbort/cogs'):
   if filename.endswith('.py'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
 
 ################################################################################
 
-bot.run(eggbort_token())
+bot.run(eggbort_token.TOKEN)
 
 # TODO
 # Voice ideas:
