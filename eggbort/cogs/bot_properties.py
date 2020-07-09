@@ -1,7 +1,12 @@
+# Built-in library imports
 import json
 
+# Discord library imports
 import discord
 from discord.ext import commands
+
+# My file imports
+import file_paths
 
 
 class BotProperties(commands.Cog):
@@ -32,24 +37,24 @@ class BotProperties(commands.Cog):
   async def on_guild_join(self, guild):
     """Adds the 'egg!' server prefix upon joining a server."""
 
-    with open('./prefixes/server_prefixes.json', 'r') as f:
+    with open(file_paths.SERVER_PREFIXES, 'r') as f:
       server_prefixes = json.load(f)
 
     server_prefixes[str(guild.id)] = 'egg!'  # default bot prefix
 
-    with open('./prefixes/server_prefixes.json', 'w') as f:
+    with open(file_paths.SERVER_PREFIXES, 'w') as f:
       json.dump(server_prefixes, f, indent=4)
 
   @commands.Cog.listener()
   async def on_guild_remove(self, guild):
     """Removes current server prefix upon leaving a server."""
 
-    with open('./prefixes/server_prefixes.json', 'r') as f:
+    with open(file_paths.SERVER_PREFIXES, 'r') as f:
       server_prefixes = json.load(f)
 
     del server_prefixes[str(guild.id)]
 
-    with open('./prefixes/server_prefixes.json', 'w') as f:
+    with open(file_paths.SERVER_PREFIXES, 'w') as f:
       json.dump(server_prefixes, f, indent=4)
 
 
@@ -69,7 +74,7 @@ class BotProperties(commands.Cog):
     If the call has an argument, changes the prefix to the argument.
     """
 
-    with open('./prefixes/server_prefixes.json', 'r') as f:
+    with open(file_paths.SERVER_PREFIXES, 'r') as f:
       server_prefix = json.load(f)
 
     new_prefix = ' '.join(args)
@@ -78,7 +83,7 @@ class BotProperties(commands.Cog):
     if new_prefix != '':
       server_prefix[str(ctx.guild.id)] = new_prefix
 
-      with open('./prefixes/server_prefixes.json', 'w') as f:
+      with open(file_paths.SERVER_PREFIXES, 'w') as f:
         json.dump(server_prefix, f, indent=4)
 
       await ctx.send('Server prefix has been updated to: {}'.format(new_prefix))
