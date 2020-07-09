@@ -1,6 +1,6 @@
 # Eggbort
 
-Eggbort is a Discord bot. Functionality will be described here as it is added.
+Eggbort is a Discord bot made in Python. Functionality will be described here as it is added.
 
 ## Commands
 
