@@ -1,7 +1,7 @@
 # Built-in library imports
 import json
 
-# Discord library imports
+# discord.py imports
 import discord
 from discord.ext import commands
 

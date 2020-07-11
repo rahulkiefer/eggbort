@@ -1,4 +1,4 @@
-# Discord library imports
+# discord.py imports
 import discord
 from discord.ext import commands
 

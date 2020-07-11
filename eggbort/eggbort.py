@@ -1,19 +1,18 @@
 # Built-in library imports
-import os
 import asyncio
 import json
+import os
 
-# Discord library imports
+# discord.py imports
 import discord
 from discord.ext import commands
-import eggbort_token
 
 # My file imports
+import eggbort_token
 import file_paths
 
 # Note: egg! is now the default (and permanent) prefix
 # whenever a serverprefix is added/changed, egg! is still be available
-
 
 def retrieve_prefix(bot, message):
   """Returns server prefix for current server on bot startup"""
@@ -23,9 +22,7 @@ def retrieve_prefix(bot, message):
 
   return ('egg!', server_prefixes[str(message.guild.id)])
 
-
 bot = commands.Bot(command_prefix=retrieve_prefix)
-
 
 ##### EVENTS ###################################################################
 
