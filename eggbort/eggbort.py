@@ -11,9 +11,6 @@ from discord.ext import commands
 import eggbort_token
 import file_paths
 
-# Note: egg! is now the default (and permanent) prefix
-# whenever a serverprefix is added/changed, egg! is still be available
-
 def retrieve_prefix(bot, message):
   """Returns server prefix for current server on bot startup"""
 
@@ -24,26 +21,10 @@ def retrieve_prefix(bot, message):
 
 bot = commands.Bot(command_prefix=retrieve_prefix)
 
-##### EVENTS ###################################################################
-
-@bot.event
-async def on_command_error(ctx, error):
-  """
-  Alerts the user if a nonexistent command is used.
-  
-  The alert message disappears after one second.
-  """
-
-  if isinstance(error, commands.CommandNotFound):
-    message = await ctx.send('Invalid command')
-    await message.delete(delay=1)
-
-
 # Loads all extensions (Cogs)
 for filename in os.listdir('eggbort/cogs'):
   if filename.endswith('.py'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
-
 
 bot.run(eggbort_token.TOKEN)
 
