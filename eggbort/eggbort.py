@@ -27,13 +27,3 @@ for filename in os.listdir('eggbort/cogs'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
 bot.run(eggbort_token.TOKEN)
-
-# TODO
-# Voice ideas:
-# "Destroooooy him"
-# "Jock shock"
-# The Rats song
-# The Rats birthday song
-
-# move a user into a channel and play loud noise
-# music capability in general
