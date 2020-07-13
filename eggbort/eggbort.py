@@ -26,4 +26,17 @@ for filename in os.listdir('eggbort/cogs'):
   if filename.endswith('.py'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
-bot.run(eggbort_token.TOKEN)
+
+bot.run(os.environ['BOT_TOKEN'])  # for running on Heroku
+# bot.run(eggbort_token.TOKEN)  # for running locally
+
+
+# TODO
+# Voice ideas:
+# "Destroooooy him"
+# "Jock shock"
+# The Rats song
+# The Rats birthday song
+
+# move a user into a channel and play loud noise
+# music capability in general
