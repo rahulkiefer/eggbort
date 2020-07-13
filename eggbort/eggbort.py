@@ -38,5 +38,6 @@ bot.run(os.environ['BOT_TOKEN'])  # for running on Heroku
 # The Rats song
 # The Rats birthday song
 
+# Misc:
 # move a user into a channel and play loud noise
 # music capability in general
