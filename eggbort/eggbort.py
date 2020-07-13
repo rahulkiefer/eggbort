@@ -29,15 +29,3 @@ for filename in os.listdir('eggbort/cogs'):
 
 bot.run(os.environ['BOT_TOKEN'])  # for running on Heroku
 # bot.run(eggbort_token.TOKEN)  # for running locally
-
-
-# TODO
-# Voice ideas:
-# "Destroooooy him"
-# "Jock shock"
-# The Rats song
-# The Rats birthday song
-
-# Misc:
-# move a user into a channel and play loud noise
-# music capability in general
