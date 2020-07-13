@@ -1,1 +1,1 @@
-worker: python eggbort.py
+worker: python eggbort/eggbort.py
