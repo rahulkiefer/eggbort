@@ -27,7 +27,7 @@ for filename in os.listdir('eggbort/cogs'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
 
-bot.run(os.environ['BOT_TOKEN'])  # for running on Heroku
+bot.run(str(os.environ['BOT_TOKEN']))  # for running on Heroku
 # bot.run(eggbort_token.TOKEN)  # for running locally
 
 
