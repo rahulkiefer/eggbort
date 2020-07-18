@@ -8,7 +8,6 @@ import discord
 from discord.ext import commands
 
 # My file imports
-import eggbort_token
 import file_paths
 
 def retrieve_prefix(bot, message):
@@ -27,5 +26,4 @@ for filename in os.listdir('eggbort/cogs'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
 
-bot.run(os.environ['BOT_TOKEN'])  # for running on Heroku
-# bot.run(eggbort_token.TOKEN)  # for running locally
+bot.run(os.environ['EGGBORT_TOKEN'])  # for running on Heroku
