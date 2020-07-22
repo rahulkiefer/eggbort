@@ -40,7 +40,7 @@ class BotProperties(commands.Cog):
     with open(file_paths.SERVER_PREFIXES, 'r') as f:
       server_prefixes = json.load(f)
 
-    server_prefixes[str(guild.id)] = 'egg!'  # default bot prefix
+    server_prefixes[str(guild.id)] = 'egg!'  # adds the default bot prefix
 
     with open(file_paths.SERVER_PREFIXES, 'w') as f:
       json.dump(server_prefixes, f, indent=4)
