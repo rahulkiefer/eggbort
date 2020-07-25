@@ -88,6 +88,7 @@ class BotProperties(commands.Cog):
 
       await ctx.send('Server prefix has been updated to: {}'.format(new_prefix))
       
+    # otherwise just list the current server prefix
     else:
       await ctx.send(
         'Current server prefix is: {}'.format(
