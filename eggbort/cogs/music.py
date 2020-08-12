@@ -123,3 +123,5 @@ class Music(commands.Cog):
         elif ctx.voice_client.is_playing():
             ctx.voice_client.stop()
 
+def setup(bot):
+    bot.add_cog(Music(bot))
