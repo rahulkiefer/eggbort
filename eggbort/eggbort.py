@@ -19,6 +19,8 @@ def retrieve_prefix(bot, message):
   return ('egg!', server_prefixes[str(message.guild.id)])
 
 bot = commands.Bot(command_prefix=retrieve_prefix)
+# bot.remove_command('help')  # removes the default help command
+# TODO implement new help command and uncomment line above
 
 # Loads all extensions (Cogs)
 for filename in os.listdir('eggbort/cogs'):
@@ -26,4 +28,4 @@ for filename in os.listdir('eggbort/cogs'):
     bot.load_extension('cogs.{}'.format(filename[:-3]))  # [:-3] gets rid of .py
 
 
-bot.run(os.environ['EGGBORT_TOKEN'])  # for running on Heroku
+bot.run(os.environ['EGGBORT_TOKEN'])
