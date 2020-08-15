@@ -40,7 +40,7 @@ class Eggbort(commands.Bot):
                 print(f'Failed to load extension {extension}.')
 
     def run(self):
-        super().run(os.environ('EGGBORT_TOKEN'))
+        super().run(os.environ['EGGBORT_TOKEN'])
 
 
 bot = Eggbort()
