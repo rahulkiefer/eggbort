@@ -38,6 +38,17 @@ class Eggbort(commands.Bot):
             except Exception as _e:
                 print(f'Failed to load extension {extension}.')
 
+    async def on_command_error(self, ctx, error):
+        """
+        Alerts the user if a nonexistent command is used.
+
+        The alert message disappears after five seconds.
+        """
+
+        if isinstance(error, commands.CommandNotFound):
+            message = await ctx.send('Invalid command')
+            await message.delete(delay=5)
+
     def run(self):
         super().run(os.environ['EGGBORT_TOKEN'])
 
