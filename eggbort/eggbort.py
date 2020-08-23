@@ -44,6 +44,3 @@ class Eggbort(commands.Bot):
 
 bot = Eggbort()
 bot.run()
-
-# bot.remove_command('help')  # removes the default help command
-# TODO implement new help command and uncomment line above
