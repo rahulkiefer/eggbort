@@ -15,6 +15,7 @@ class Poll(commands.Cog):
 
     @commands.command()
     async def poll(self, ctx):
+        """Creates a poll using reactions on the creator's message"""
         message = ctx.message
         await message.add_reaction('👍')
         await message.add_reaction('👎')
