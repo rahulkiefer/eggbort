@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 
-
+# dictionary of all individual bot command embeds
 eggbort_commands = {
     # Bot Properties
     'ping': discord.Embed(
@@ -53,17 +53,20 @@ eggbort_commands = {
 }
 
 
+# embed for overall help command call
 help_embed = discord.Embed(
                 title='Eggbort Commands',
                 description='Call help on specific commands to get more info.',
                 color=discord.Color.gold(),
             )
 
-# TODO get link to eggbort's avatar
-help_embed.set_footer(text="Eggbort Commands")
-# help_embed.set_thumbnail(url=[LINK TO EGGBORT AVATAR PNG])
+help_embed.set_footer(
+    text='Bot by rdk750#9435',
+    icon_url='https://cdn.discordapp.com/avatars/220377491926286337/786637c4ef148510dcbe13b865f3e0ea.png?size=256'
+)
 
-# COG descriptions vvv
+# TODO get link to eggbort's avatar
+# help_embed.set_thumbnail(url=[LINK TO EGGBORT AVATAR PNG])
 
 help_embed.add_field(
     name='❓ Help',
@@ -102,7 +105,6 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # TODO make 'help' send an embedded message in the server
     @commands.command()
     async def help(self, ctx, *args):
         """
