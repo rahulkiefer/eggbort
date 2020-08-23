@@ -75,11 +75,10 @@ class BotProperties(commands.Cog):
         with open(file_paths.SERVER_PREFIXES, 'r') as f:
             server_prefix = json.load(f)
 
-        new_prefix = ' '.join(args)
-
         # if an argument for serverprefix has been given, set it as the new
         # prefix
-        if new_prefix != '':
+        if len(args) > 0:
+            new_prefix = ' '.join(args)
             server_prefix[str(ctx.guild.id)] = new_prefix
 
             with open(file_paths.SERVER_PREFIXES, 'w') as f:
