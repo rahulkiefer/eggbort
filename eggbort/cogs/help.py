@@ -121,7 +121,7 @@ class Help(commands.Cog):
         self.bot = bot
 
     # TODO make 'help' send an embedded message in the server
-    @commands.command
+    @commands.command()
     async def help(self, ctx, *args):
         """
         Sends an embedded message in the text channel explaining all bot commands.
