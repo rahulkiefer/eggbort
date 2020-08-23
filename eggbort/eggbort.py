@@ -26,7 +26,12 @@ def retrieve_prefix(bot, message):
     with open(file_paths.SERVER_PREFIXES) as f:
         server_prefixes = json.load(f)
 
-    return ('egg!', server_prefixes[str(message.guild.id)])
+    guild_id = str(message.guild.id)
+
+    if server_prefixes[guild_id] is None:
+        return 'egg!'
+    else:
+        return ('egg!', server_prefixes[guild_id])
 
 
 class Eggbort(commands.Bot):
