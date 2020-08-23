@@ -27,34 +27,35 @@ class BotProperties(commands.Cog):
             status=discord.Status.online,
             activity=discord.Activity(
                 type=discord.ActivityType.playing,
-                name='egg!help'
+                name='e.help'
             )
         )
         print('Bot is ready.')  # for debugging purposes
 
-    @commands.Cog.listener()
-    async def on_guild_join(self, guild):
-        """Adds the 'egg!' server prefix upon joining a server."""
+    # TODO re-implement with external DB to store prefixes
+    # @commands.Cog.listener()
+    # async def on_guild_join(self, guild):
+    #     """Adds the 'e.' server prefix upon joining a server."""
 
-        with open(file_paths.SERVER_PREFIXES, 'r') as f:
-            server_prefixes = json.load(f)
+    #     with open(file_paths.SERVER_PREFIXES, 'r') as f:
+    #         server_prefixes = json.load(f)
 
-        server_prefixes[str(guild.id)] = 'egg!'  # adds the default bot prefix
+    #     server_prefixes[str(guild.id)] = 'e.'  # adds the default bot prefix
 
-        with open(file_paths.SERVER_PREFIXES, 'w') as f:
-            json.dump(server_prefixes, f, indent=4)
+    #     with open(file_paths.SERVER_PREFIXES, 'w') as f:
+    #         json.dump(server_prefixes, f, indent=4)
 
-    @commands.Cog.listener()
-    async def on_guild_remove(self, guild):
-        """Removes current server prefix upon leaving a server."""
+    # @commands.Cog.listener()
+    # async def on_guild_remove(self, guild):
+    #     """Removes current server prefix upon leaving a server."""
 
-        with open(file_paths.SERVER_PREFIXES, 'r') as f:
-            server_prefixes = json.load(f)
+    #     with open(file_paths.SERVER_PREFIXES, 'r') as f:
+    #         server_prefixes = json.load(f)
 
-        del server_prefixes[str(guild.id)]
+    #     del server_prefixes[str(guild.id)]
 
-        with open(file_paths.SERVER_PREFIXES, 'w') as f:
-            json.dump(server_prefixes, f, indent=4)
+    #     with open(file_paths.SERVER_PREFIXES, 'w') as f:
+    #         json.dump(server_prefixes, f, indent=4)
 
     ##### COMMANDS ###########################################################
 
@@ -63,38 +64,39 @@ class BotProperties(commands.Cog):
         """Displays the bot's latency"""
         await ctx.send('Latency: {} ms'.format(round(self.bot.latency * 1000)))
 
-    @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def serverprefix(self, ctx, *args):
-        """
-        Shows (changes) the server prefix (w/ argument)
+    # TODO re-implement with external DB to store prefixes
+    # @commands.command()
+    # @commands.has_permissions(administrator=True)
+    # async def serverprefix(self, ctx, *args):
+    #     """
+    #     Shows (changes) the server prefix (w/ argument)
 
-        If the call has an argument, changes the prefix to the argument.
-        """
+    #     If the call has an argument, changes the prefix to the argument.
+    #     """
 
-        with open(file_paths.SERVER_PREFIXES, 'r') as f:
-            server_prefix = json.load(f)
+    #     with open(file_paths.SERVER_PREFIXES, 'r') as f:
+    #         server_prefix = json.load(f)
 
-        # if an argument for serverprefix has been given, set it as the new
-        # prefix
-        if len(args) > 0:
-            new_prefix = ' '.join(args)
-            server_prefix[str(ctx.guild.id)] = new_prefix
+    #     # if an argument for serverprefix has been given, set it as the new
+    #     # prefix
+    #     if len(args) > 0:
+    #         new_prefix = ' '.join(args)
+    #         server_prefix[str(ctx.guild.id)] = new_prefix
 
-            with open(file_paths.SERVER_PREFIXES, 'w') as f:
-                json.dump(server_prefix, f, indent=4)
+    #         with open(file_paths.SERVER_PREFIXES, 'w') as f:
+    #             json.dump(server_prefix, f, indent=4)
 
-            await ctx.send(
-                'Server prefix has been updated to: {}'.format(new_prefix)
-            )
+    #         await ctx.send(
+    #             'Server prefix has been updated to: {}'.format(new_prefix)
+    #         )
 
-        # otherwise just list the current server prefix
-        else:
-            await ctx.send(
-                'Current server prefix is: {}'.format(
-                    server_prefix[str(ctx.guild.id)]
-                )
-            )
+    #     # otherwise just list the current server prefix
+    #     else:
+    #         await ctx.send(
+    #             'Current server prefix is: {}'.format(
+    #                 server_prefix[str(ctx.guild.id)]
+    #             )
+    #         )
 
 
 def setup(bot):

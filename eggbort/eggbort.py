@@ -19,24 +19,22 @@ initial_extensions = (
     'cogs.poll',
 )
 
+# TODO re-implement with external DB to store prefixes
+# def retrieve_prefix(bot, message):
+#     """Returns server prefix for current server on bot startup"""
 
-def retrieve_prefix(bot, message):
-    """Returns server prefix for current server on bot startup"""
+#     with open(file_paths.SERVER_PREFIXES) as f:
+#         server_prefixes = json.load(f)
 
-    with open(file_paths.SERVER_PREFIXES) as f:
-        server_prefixes = json.load(f)
+#     guild_id = str(message.guild.id)
 
-    guild_id = str(message.guild.id)
-
-    if server_prefixes[guild_id] is None:
-        return 'egg!'
-    else:
-        return ('egg!', server_prefixes[guild_id])
+#     if server_prefixes[guild_id] is None:
+#         return ('egg!', server_prefixes[guild_id])
 
 
 class Eggbort(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix=retrieve_prefix)
+        super().__init__(command_prefix='e.')
 
         for extension in initial_extensions:
             try:
