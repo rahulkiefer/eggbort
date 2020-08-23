@@ -14,7 +14,6 @@ initial_extensions = (
     'cogs.bot_properties',
     'cogs.chat_management',
     'cogs.debugging',
-    'cogs.events',
     'cogs.help',
     'cogs.poll',
 )
