@@ -66,13 +66,13 @@ help_embed.set_footer(text="Eggbort Commands")
 # COG descriptions vvv
 
 help_embed.add_field(
-    name='Help',
+    name='❓ Help',
     value='• help [command]',
     inline=True,
 )
 
 help_embed.add_field(
-    name='Bot Properties',
+    name='🛠️ Bot Properties',
     value='''
             • ping
             ''',
@@ -80,31 +80,13 @@ help_embed.add_field(
 )
 
 help_embed.add_field(
-    name='Chat Management',
+    name='📝 Chat Management',
     value='• clear [amount]',
     inline=True,
 )
 
 help_embed.add_field(
-    name='Debugging',
-    value='''
-            • load [extension]
-            • reload [extension]
-            • unload [extension]
-            ''',
-    inline=True,
-)
-
-help_embed.add_field(
-    name='Help',
-    value='''
-            • help [command]
-            ''',
-    inline=True,
-)
-
-help_embed.add_field(
-    name='Poll',
+    name='📊 Poll',
     value='''
             • poll [message]
             ''',
