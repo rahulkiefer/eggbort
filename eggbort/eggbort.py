@@ -16,6 +16,7 @@ initial_extensions = (
     'cogs.debugging',
     'cogs.events',
     'cogs.help',
+    'cogs.poll',
 )
 
 
