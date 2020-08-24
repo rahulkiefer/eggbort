@@ -1,11 +1,10 @@
-import discord
 from discord.ext import commands
 
 
 class Poll(commands.Cog):
     """
     Commands that relate to creating polls.
-    
+
     Any commands that interact with users' reactions on messages (e.g. raffle
     winner selection, etc.).
     """
@@ -20,6 +19,7 @@ class Poll(commands.Cog):
         await message.add_reaction('👍')
         await message.add_reaction('👎')
         await message.add_reaction('🤷')
+
 
 def setup(bot):
     bot.add_cog(Poll(bot))
