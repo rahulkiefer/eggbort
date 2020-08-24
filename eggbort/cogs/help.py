@@ -1,6 +1,6 @@
 # discord.py imports
 import discord
-from discord.ext import commands  # TODO add in User Info commands
+from discord.ext import commands
 
 # dictionary of all individual bot command embeds
 eggbort_commands = {
@@ -50,6 +50,29 @@ eggbort_commands = {
                             ''',
                 color=discord.Color.red(),
             ),
+    # User Info
+    'avatar': discord.Embed(
+                title='avatar',
+                description='''
+                            Sends the avatar of the specified member.  # TODO as a copyable file
+                            Arguments:
+                            member
+
+                            `e.avatar <@member>`
+                            ''',
+                color=discord.Color.blue(),
+            ),
+    'joindate': discord.Embed(
+                title='joindate',
+                description='''
+                            Gives the date the member first joined the server.
+                            Arguments:
+                            member
+
+                            `e.joindate <@member>`
+                            ''',
+                color=discord.Color.blue(),
+            ),
 }
 
 
@@ -61,7 +84,7 @@ help_embed = discord.Embed(
             )
 
 help_embed.set_footer(
-    text='Bot by rdk750#9435',
+    text='Bot developed by rdk750#9435',
     icon_url='https://cdn.discordapp.com/avatars/220377491926286337/786637c4ef148510dcbe13b865f3e0ea.png?size=256'
 )
 
@@ -97,6 +120,14 @@ help_embed.add_field(
     inline=True,
 )
 
+help_embed.add_field(
+    name='ℹ️ User Info',
+    value='''
+            • avatar <@member>
+            • joindate <@member>
+            ''',
+    inline=True,
+)
 
 class Help(commands.Cog):
     """
