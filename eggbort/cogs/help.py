@@ -1,6 +1,6 @@
 # discord.py imports
 import discord
-from discord.ext import commands
+from discord.ext import commands  # TODO add in User Info commands
 
 # dictionary of all individual bot command embeds
 eggbort_commands = {
@@ -65,8 +65,9 @@ help_embed.set_footer(
     icon_url='https://cdn.discordapp.com/avatars/220377491926286337/786637c4ef148510dcbe13b865f3e0ea.png?size=256'
 )
 
-# TODO get link to eggbort's avatar
-# help_embed.set_thumbnail(url=[LINK TO EGGBORT AVATAR PNG])
+help_embed.set_thumbnail(
+    url='https://cdn.discordapp.com/avatars/728707277489569902/fd9afd578e4c4a8b6d4b947e09cf4e28.png'
+)
 
 help_embed.add_field(
     name='❓ Help',
