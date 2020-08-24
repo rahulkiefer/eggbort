@@ -2,7 +2,7 @@
 import json
 
 # discord.py imports
-import discord
+from discord import Activity, ActivityType, Status
 from discord.ext import commands
 
 # My file imports
@@ -24,9 +24,9 @@ class BotProperties(commands.Cog):
         """Sets the bot's status and activity upon booting up"""
 
         await self.bot.change_presence(
-            status=discord.Status.online,
-            activity=discord.Activity(
-                type=discord.ActivityType.playing,
+            status=Status.online,
+            activity=Activity(
+                type=ActivityType.playing,
                 name='e.help'
             )
         )

@@ -1,21 +1,21 @@
 # discord.py imports
-import discord
+from discord import Embed, Color
 from discord.ext import commands
 
 # dictionary of all individual bot command embeds
 eggbort_commands = {
     # Bot Properties
-    'ping': discord.Embed(
+    'ping': Embed(
                 title='ping',
                 description='''
                             Displays the bot's latency.
 
                             `e.ping`
                             ''',
-                color=discord.Color.green(),
+                color=Color.green(),
             ),
     # Chat Management
-    'clear': discord.Embed(
+    'clear': Embed(
                 title='clear',
                 description='''
                             Deletes the given number of messages.
@@ -24,10 +24,10 @@ eggbort_commands = {
 
                             `e.clear [amount]`
                             ''',
-                color=discord.Color.lighter_grey(),
+                color=Color.lighter_grey(),
             ),
     # Help
-    'help': discord.Embed(
+    'help': Embed(
                 title='help',
                 description='''
                             Gives bot command descriptions.
@@ -36,10 +36,10 @@ eggbort_commands = {
 
                             `e.help [command]`
                             ''',
-                color=discord.Color.purple(),
+                color=Color.purple(),
             ),
     # Poll
-    'poll': discord.Embed(
+    'poll': Embed(
                 title='poll',
                 description='''
                             Creates a poll using reactions on the message.
@@ -48,10 +48,10 @@ eggbort_commands = {
 
                             `e.poll [message]`
                             ''',
-                color=discord.Color.red(),
+                color=Color.red(),
             ),
     # User Info
-    'avatar': discord.Embed(
+    'avatar': Embed(
                 title='avatar',
                 description='''
                             Sends the avatar of the specified member.  # TODO as a copyable file
@@ -60,9 +60,9 @@ eggbort_commands = {
 
                             `e.avatar <@member>`
                             ''',
-                color=discord.Color.blue(),
+                color=Color.blue(),
             ),
-    'joindate': discord.Embed(
+    'joindate': Embed(
                 title='joindate',
                 description='''
                             Gives the date the member first joined the server.
@@ -71,16 +71,16 @@ eggbort_commands = {
 
                             `e.joindate <@member>`
                             ''',
-                color=discord.Color.blue(),
+                color=Color.blue(),
             ),
 }
 
 
 # embed for overall help command call
-help_embed = discord.Embed(
+help_embed = Embed(
                 title='Eggbort Commands',
                 description='Call help on specific commands to get more info.',
-                color=discord.Color.gold(),
+                color=Color.gold(),
             )
 
 help_embed.set_footer(
@@ -151,7 +151,7 @@ class Help(commands.Cog):
             await ctx.send(
                 embed=eggbort_commands.get(
                           cmd,
-                          discord.Embed(description=f'{cmd} is not a command.')
+                          Embed(description=f'{cmd} is not a command.')
                 )
             )
 
