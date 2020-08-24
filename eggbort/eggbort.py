@@ -16,6 +16,7 @@ initial_extensions = (
     'cogs.debugging',
     'cogs.help',
     'cogs.poll',
+    'cogs.user_info',
 )
 
 # TODO re-implement with external DB to store prefixes
@@ -33,7 +34,10 @@ initial_extensions = (
 
 class Eggbort(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix='e.')
+        super().__init__(
+            command_prefix='e.',
+            owner_id='220377491926286337'  #  my Discord user ID
+        )
 
         for extension in initial_extensions:
             try:

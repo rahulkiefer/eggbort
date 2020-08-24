@@ -1,11 +1,4 @@
-# discord.py imports
-import discord
 from discord.ext import commands
-
-
-def user_is_me(ctx):
-    # Must change the id to be your Discord user id if you've forked the repo
-    return ctx.message.author.id == 220377491926286337
 
 
 class Debugging(commands.Cog):
@@ -19,7 +12,7 @@ class Debugging(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @commands.check(user_is_me)
+    @commands.is_owner()
     async def load(self, ctx, extension):
         """Manually loads a specified cog"""
 
@@ -27,7 +20,7 @@ class Debugging(commands.Cog):
         print('{} was loaded'.format(extension))
 
     @commands.command()
-    @commands.check(user_is_me)
+    @commands.is_owner()
     async def unload(self, ctx, extension):
         """Manually unloads a specified cog"""
 
@@ -35,7 +28,7 @@ class Debugging(commands.Cog):
         print('{} was unloaded'.format(extension))
 
     @commands.command()
-    @commands.check(user_is_me)
+    @commands.is_owner()
     async def reload(self, ctx, extension):
         """Manually reloads a specified cog"""
 
