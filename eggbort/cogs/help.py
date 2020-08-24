@@ -54,22 +54,22 @@ eggbort_commands = {
     'avatar': Embed(
                 title='avatar',
                 description='''
-                            Sends the avatar of the specified member.  # TODO as a copyable file
+                            Sends the avatar of the specified user.
                             Arguments:
-                            member
+                            user
 
-                            `e.avatar <@member>`
+                            `e.avatar <@user>`
                             ''',
                 color=Color.blue(),
             ),
     'joindate': Embed(
                 title='joindate',
                 description='''
-                            Gives the date the member first joined the server.
+                            Gives the date the user first joined the server.
                             Arguments:
-                            member
+                            user
 
-                            `e.joindate <@member>`
+                            `e.joindate <@user>`
                             ''',
                 color=Color.blue(),
             ),
@@ -123,8 +123,8 @@ help_embed.add_field(
 help_embed.add_field(
     name='ℹ️ User Info',
     value='''
-            • avatar <@member>
-            • joindate <@member>
+            • avatar <@user>
+            • joindate <@user>
             ''',
     inline=True,
 )

@@ -17,7 +17,7 @@ class UserInfo(commands.Cog):
 
     @commands.command()
     async def avatar(self, ctx):
-        '''Sends the user's avatar.'''
+        '''Sends the user's avatar as a file that can be copied.'''
         user = ctx.message.mentions[0]
         url = f'{user.avatar_url}?size=256'
 
