@@ -56,9 +56,9 @@ class Eggbort(commands.Bot):
             await ctx.send('Invalid command')
 
         if isinstance(error, commands.MissingPermissions):
+            perms = ', '.join(error.missing_perms)
             await ctx.send(
-                'You are missing the following permission(s): ',
-                ', '.join(error.missing_perms)
+                f'You are missing the following permission(s): {perms}'
             )
 
     def run(self):
