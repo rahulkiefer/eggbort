@@ -11,7 +11,7 @@ class ChatManagement(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def clear(self, ctx, n_messages=1):
+    async def clear(self, ctx, n_messages: int=1):
         """
         Deletes the given number of messages above (default is 1)
 
