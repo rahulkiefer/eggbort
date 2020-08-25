@@ -53,8 +53,13 @@ class Eggbort(commands.Bot):
         """
 
         if isinstance(error, commands.CommandNotFound):
-            message = await ctx.send('Invalid command')
-            await message.delete(delay=5)
+            await ctx.send('Invalid command')
+
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.send(
+                'You are missing the following permission(s): ',
+                ', '.join(error.missing_perms)
+            )
 
     def run(self):
         super().run(os.environ['EGGBORT_TOKEN'])
