@@ -46,19 +46,15 @@ class Eggbort(commands.Bot):
                 print(f'Failed to load extension {extension}.')
 
     async def on_command_error(self, ctx, error):
-        """
-        Alerts the user if a nonexistent command is used.
-
-        The alert message disappears after five seconds.
-        """
+        '''General error-handling for commands.'''
 
         if isinstance(error, commands.CommandNotFound):
             await ctx.send('Invalid command')
 
-        if isinstance(error, commands.MissingPermissions):
+        elif isinstance(error, commands.MissingPermissions):
             perms = ', '.join(error.missing_perms)
             await ctx.send(
-                f'You are missing the following permission(s): {perms}'
+                f'You are missing the following permission(s) for this command: {perms}'
             )
 
     def run(self):
