@@ -146,7 +146,7 @@ class Help(commands.Cog):
         command within the text channel it was invoked from.
         """
         if len(args) > 0:
-            cmd = args[0]
+            cmd = ' '.join(args)
 
             await ctx.send(
                 embed=eggbort_commands.get(
