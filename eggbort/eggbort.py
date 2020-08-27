@@ -17,7 +17,7 @@ initial_extensions = (
     'cogs.help',
     'cogs.poll',
     'cogs.user_info',
-    'cogs.voice',
+    # 'cogs.voice',
 )
 
 # TODO re-implement with external DB to store prefixes
