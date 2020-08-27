@@ -25,6 +25,9 @@ eggbort_commands = {
                             `e.clear [amount]`
                             ''',
                 color=Color.lighter_grey(),
+            ).add_field(
+                name='Aliases',
+                value='delete',
             ),
     # Help
     'help': Embed(
@@ -61,6 +64,9 @@ eggbort_commands = {
                             `e.avatar <@user>`
                             ''',
                 color=Color.blue(),
+            ).add_field(
+                name='Aliases',
+                value='pfp',
             ),
     'joindate': Embed(
                 title='joindate',

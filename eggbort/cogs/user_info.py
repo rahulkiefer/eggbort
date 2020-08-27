@@ -15,7 +15,7 @@ class UserInfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['pfp'])
     async def avatar(self, ctx):
         '''Sends the user's avatar as a file that can be copied.'''
         user = ctx.message.mentions[0]
