@@ -17,6 +17,7 @@ initial_extensions = (
     'cogs.help',
     'cogs.poll',
     'cogs.user_info',
+    'cogs.voice',
 )
 
 # TODO re-implement with external DB to store prefixes
@@ -54,7 +55,13 @@ class Eggbort(commands.Bot):
         elif isinstance(error, commands.MissingPermissions):
             perms = ', '.join(error.missing_perms)
             await ctx.send(
-                f'You are missing the following permission(s) for this command: {perms}'
+                f'You are missing the following permission(s) to invoke this command: {perms}'
+            )
+
+        elif isinstance(error, commands.BotMissingPermissions):
+            perms = ', '.join(error.missing_perms)
+            await ctx.send(
+                f'I need the following permission(s) to run this command: {perms}'
             )
 
     def run(self):
