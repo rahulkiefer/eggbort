@@ -1,0 +1,13 @@
+version: '3'  # version of the docker-compose file format (DO NOT CHANGE)
+
+services:
+
+  eggbort:
+    build: ./Eggbort  # use build if there is a Dockerfile in that directory
+    volumes:
+      - ./Eggbort:/usr/src/app
+
+  lavalink:
+    image: fredboat/lavalink:master
+    volumes:
+      - ./Lavalink/lavalink.yml:/opt/Lavalink/application.yml
