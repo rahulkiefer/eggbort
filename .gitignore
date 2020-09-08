@@ -1,5 +1,9 @@
+# my todo list
 todo
 
-/env/
+# python files
+__pycache__/
+env/
 
+# vscode settings
 .vscode
