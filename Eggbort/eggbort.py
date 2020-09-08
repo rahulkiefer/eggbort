@@ -15,7 +15,7 @@ initial_extensions = (
     'cogs.chat_management',
     'cogs.debugging',
     'cogs.help',
-    # 'cogs.music',
+    'cogs.music',
     'cogs.poll',
     'cogs.user_info',
     # 'cogs.voice',
