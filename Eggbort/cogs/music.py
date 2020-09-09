@@ -70,12 +70,12 @@ class Music(commands.Cog):
     # Initiate our nodes. For this example we will use one server.
     # Region should be a discord.py guild.region e.g sydney or us_central
     node = await self.bot.wavelink.initiate_node(
-                                                host='lavalink',
-                                                port=2333,
-                                                rest_uri='http://lavalink:2333',
-                                                password='youshallnotpass',
-                                                identifier='MAIN',
-                                                region='us_east'
+      host='lavalink',
+      port=2333,
+      rest_uri='http://lavalink:2333',
+      password='youshallnotpass',
+      identifier='MAIN',
+      region='us_east'
     )
 
     # Set our node hook callback
