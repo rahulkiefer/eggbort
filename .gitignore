@@ -7,6 +7,3 @@ env/
 
 # vscode settings
 .vscode
-
-# Docker
-docker-compose.yml
