@@ -1,14 +1,10 @@
 # Built-in library imports
 import asyncio
-# import json
 import os
 
 # discord.py imports
 import discord
 from discord.ext import commands
-
-# My file imports
-# import file_paths
 
 initial_extensions = (
     'cogs.bot_properties',
