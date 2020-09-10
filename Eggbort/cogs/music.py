@@ -155,7 +155,7 @@ class Music(commands.Cog):
 
     controller = self.get_controller(ctx)
     await controller.queue.put(track)
-    await ctx.send(f'Added {str(track)} to the queue.', delete_after=15)
+    await ctx.send(f'{ctx.author.mention} added {str(track)} to the queue.')
 
   @commands.command()
   async def pause(self, ctx):
@@ -164,7 +164,7 @@ class Music(commands.Cog):
     if not player.is_playing:
       return await ctx.send('I am not currently playing anything!', delete_after=15)
 
-    await ctx.send('Pausing the song!', delete_after=15)
+    await ctx.send('Pausing the song!')
     await player.set_pause(True)
 
   @commands.command()
@@ -174,7 +174,7 @@ class Music(commands.Cog):
     if not player.paused:
       return await ctx.send('I am not currently paused!', delete_after=15)
 
-    await ctx.send('Resuming the player!', delete_after=15)
+    await ctx.send('Resuming the player!')
     await player.set_pause(False)
 
   @commands.command()
@@ -185,10 +185,11 @@ class Music(commands.Cog):
     if not player.is_playing:
       return await ctx.send('I am not currently playing anything!', delete_after=15)
 
-    await ctx.send('Skipping the song!', delete_after=15)
+    await ctx.send('Skipping the song!')
     await player.stop()
 
   @commands.command()
+  @commands.has_permissions(administrator=True)
   async def volume(self, ctx, *, vol: int):
     """Set the player volume."""
     player = self.bot.wavelink.get_player(ctx.guild.id)
@@ -220,7 +221,7 @@ class Music(commands.Cog):
     controller = self.get_controller(ctx)
 
     if not player.current or not controller.queue._queue:
-      return await ctx.send('There are no songs currently in the queue.', delete_after=20)
+      return await ctx.send('There are no songs currently in the queue.')
 
     upcoming = list(itertools.islice(controller.queue._queue, 0, 5))
 
@@ -241,7 +242,7 @@ class Music(commands.Cog):
       return await ctx.send('There was no controller to stop.')
 
     await player.disconnect()
-    await ctx.send('Disconnected player and killed controller.', delete_after=20)
+    await ctx.send('Disconnected player and killed controller.')
 
   @commands.command()
   async def info(self, ctx):
