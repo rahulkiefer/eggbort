@@ -22,7 +22,7 @@ six==1.15.0
 toml==0.10.1
 typed-ast==1.4.1
 typing-extensions==3.7.4.2
-wavelink==0.5.1
+wavelink==0.9.6
 websockets==8.1
 wrapt==1.12.1
 yarl==1.4.2
