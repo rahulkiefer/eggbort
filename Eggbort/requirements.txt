@@ -4,7 +4,6 @@ async-timeout==3.0.1
 attrs==19.3.0
 cffi==1.14.0
 chardet==3.0.4
-discord-ext-menus==1.0.0a26+g84caae8
 discord.py==1.4.1
 humanize==2.6.0
 idna==2.10
