@@ -55,6 +55,8 @@ eggbort_commands = {
                 title='play',
                 description='''
                             Play or queue a song with the given query.
+                            Arguments:
+                            query (default: None)
 
                             `e.play [query]`
                             ''',
@@ -99,7 +101,7 @@ eggbort_commands = {
     'volume': Embed(
                 title='volume',
                 description='''
-                            Change the players volume, between 1 and 100.
+                            Change the player's volume, between 1 and 100.
                             Arguments:
                             volume (default: None)
 
@@ -139,7 +141,7 @@ eggbort_commands = {
     'queue': Embed(
                 title='queue',
                 description='''
-                            Display the players queued songs.
+                            Display the player's queued songs.
 
                             `e.queue`
                             ''',
@@ -163,7 +165,7 @@ eggbort_commands = {
     'swap_dj': Embed(
                 title='nowplaying',
                 description='''
-                            Update the player controller.
+                            Swap the current DJ to another member in the voice channel.
                             Arguments:
                             user (default: None)
 
@@ -252,7 +254,7 @@ help_embed.add_field(
 )
 
 help_embed.add_field(
-    name=' Music',
+    name='🎵 Music',
     value='''
             • connect
             • play [query]

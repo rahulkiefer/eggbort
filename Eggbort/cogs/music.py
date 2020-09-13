@@ -20,7 +20,7 @@ class NoChannelProvided(commands.CommandError):
 
 
 class IncorrectChannelError(commands.CommandError):
-    """Error raised when commands are issued outside of the players session channel."""
+    """Error raised when commands are issued outside of the player's session channel."""
     pass
 
 
@@ -79,7 +79,7 @@ class Player(wavelink.Player):
         await self.play(track)
         self.waiting = False
 
-        # Invoke our players controller...
+        # Invoke our player's controller...
         await self.invoke_controller()
 
     async def invoke_controller(self) -> None:
@@ -111,7 +111,7 @@ class Player(wavelink.Player):
         self.updating = False
 
     def build_embed(self) -> typing.Optional[discord.Embed]:
-        """Method which builds our players controller embed."""
+        """Method which builds our player's controller embed."""
         track = self.current
         if not track:
             return
@@ -159,7 +159,7 @@ class Player(wavelink.Player):
 
 
 class InteractiveController(menus.Menu):
-    """The Players interactive controller menu class."""
+    """The Player's interactive controller menu class."""
 
     def __init__(self, *, embed: discord.Embed, player: Player):
         super().__init__(timeout=None)
@@ -374,7 +374,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     async def cog_before_invoke(self, ctx: commands.Context):
         """Coroutine called before command invocation.
-        We mainly just want to check whether the user is in the players controller channel.
+        We mainly just want to check whether the user is in the player's controller channel.
         """
         player: Player = self.bot.wavelink.get_player(ctx.guild.id, cls=Player, context=ctx)
 
@@ -564,7 +564,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(aliases=['v', 'vol'])
     async def volume(self, ctx: commands.Context, *, vol: int):
-        """Change the players volume, between 1 and 100."""
+        """Change the player's volume, between 1 and 100."""
         player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
 
         if not player.is_connected:
@@ -664,7 +664,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(aliases=['q', 'que'])
     async def queue(self, ctx: commands.Context):
-        """Display the players queued songs."""
+        """Display the player's queued songs."""
         player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
 
         if not player.is_connected:
