@@ -41,6 +41,139 @@ eggbort_commands = {
                             ''',
                 color=Color.purple(),
             ),
+    # Music
+    'connect': Embed(
+                title='connect',
+                description='''
+                            Connect to a voice channel.
+
+                            `e.connect`
+                            ''',
+                color=Color.red(),
+            ),
+    'play': Embed(
+                title='play',
+                description='''
+                            Play or queue a song with the given query.
+
+                            `e.play [query]`
+                            ''',
+                color=Color.red(),
+            ),
+    'pause': Embed(
+                title='pause',
+                description='''
+                            Pause the currently playing song.
+
+                            `e.pause`
+                            ''',
+                color=Color.red(),
+            ),
+    'resume': Embed(
+                title='resume',
+                description='''
+                            Resume a currently paused player.
+
+                            `e.resume`
+                            ''',
+                color=Color.red(),
+            ),
+    'skip': Embed(
+                title='skip',
+                description='''
+                            Skip the currently playing song.
+
+                            `e.skip`
+                            ''',
+                color=Color.red(),
+            ),
+    'stop': Embed(
+                title='stop',
+                description='''
+                            Stop the player and clear all internal states.
+
+                            `e.stop`
+                            ''',
+                color=Color.red(),
+            ),
+    'volume': Embed(
+                title='volume',
+                description='''
+                            Change the players volume, between 1 and 100.
+                            Arguments:
+                            volume (default: None)
+
+                            `e.volume [volume]`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='v, vol',
+            ),
+    'shuffle': Embed(
+                title='shuffle',
+                description='''
+                            Shuffle the player's queue.
+
+                            `e.shuffle`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='mix',
+            ),
+    'equalizer': Embed(
+                title='equalizer',
+                description='''
+                            Change the player's equalizer.
+                            Arguments:
+                            equalizer (default: None)
+
+                            `e.equalizer`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='eq',
+            ),
+    'queue': Embed(
+                title='queue',
+                description='''
+                            Display the players queued songs.
+
+                            `e.queue`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='q, que',
+            ),
+    'nowplaying': Embed(
+                title='nowplaying',
+                description='''
+                            Update the player controller.
+
+                            `e.nowplaying`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='np, now_playing, current',
+            ),
+    'swap_dj': Embed(
+                title='nowplaying',
+                description='''
+                            Update the player controller.
+                            Arguments:
+                            user (default: None)
+
+                            `e.swap_dj <@user>`
+                            ''',
+                color=Color.red(),
+            ).add_field(
+                name='Aliases',
+                value='swap',
+            ),
     # Poll
     'poll': Embed(
                 title='poll',
@@ -115,6 +248,25 @@ help_embed.add_field(
 help_embed.add_field(
     name='📝 Chat Management',
     value='• clear [amount]',
+    inline=True,
+)
+
+help_embed.add_field(
+    name=' Music',
+    value='''
+            • connect
+            • play [query]
+            • pause
+            • resume
+            • skip
+            • stop
+            • volume [volume]
+            • shuffle
+            • equalizer [equalizer]
+            • queue
+            • nowplaying
+            • swap_dj <@user>
+            ''',
     inline=True,
 )
 

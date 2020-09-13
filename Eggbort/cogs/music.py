@@ -581,7 +581,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(aliases=['mix'])
     async def shuffle(self, ctx: commands.Context):
-        """Shuffle the players queue."""
+        """Shuffle the player's queue."""
         player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
 
         if not player.is_connected:
@@ -639,7 +639,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(aliases=['eq'])
     async def equalizer(self, ctx: commands.Context, *, equalizer: str):
-        """Change the players equalizer."""
+        """Change the player's equalizer."""
         player: Player = self.bot.wavelink.get_player(guild_id=ctx.guild.id, cls=Player, context=ctx)
 
         if not player.is_connected:
