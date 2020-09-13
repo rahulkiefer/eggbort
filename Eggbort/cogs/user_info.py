@@ -19,7 +19,7 @@ class UserInfo(commands.Cog):
     async def avatar(self, ctx):
         '''Sends the user's avatar as a file that can be copied.'''
         user = ctx.message.mentions[0]
-        url = f'{user.avatar_url}?size=256'
+        url = f'{user.avatar_url}'
 
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as resp:
