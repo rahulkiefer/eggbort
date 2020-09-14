@@ -3,17 +3,9 @@ version: '3'  # version of the docker-compose file format (DO NOT CHANGE)
 # User-defined bridges provide automatic DNS resolution between containers
 networks:
   eggnet:  # the name of my user-defined network
-    external: true
+    external: true  # network was created outside of this file
 
 services:
-  lavalink:
-    container_name: lavalink
-    image: fredboat/lavalink:master
-    volumes:
-      - ./Lavalink/application.yml:/opt/Lavalink/application.yml
-    networks:
-      - eggnet
-
   bot:
     container_name: bot
     build: ./Eggbort  # use build if there is a Dockerfile in that directory
@@ -25,3 +17,13 @@ services:
       - eggnet
     depends_on:
       - lavalink
+    restart: always
+
+  lavalink:
+    container_name: lavalink
+    image: fredboat/lavalink:master
+    volumes:
+      - ./Lavalink/application.yml:/opt/Lavalink/application.yml
+    networks:
+      - eggnet
+    restart: always
