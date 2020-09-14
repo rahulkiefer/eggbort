@@ -175,13 +175,8 @@ class InteractiveController(menus.Menu):
         return ctx
 
     def reaction_check(self, payload: discord.RawReactionActionEvent):
-
-        # TODO test - removing this statement should allow menu button interactions
-        # to count for both adding and removing reactions
-        # e.g. click pause button to pause music, click resume to resume, clicking pause
-        # should then pause the music (even though the user already reacted to it)
-        # if payload.event_type == 'REACTION_REMOVE':
-        #     return False
+        if payload.event_type == 'REACTION_REMOVE':
+            return False
 
         if not payload.member:
             return False
