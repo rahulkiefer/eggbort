@@ -4,7 +4,9 @@ Eggbort is a Discord bot made in Python. [Here is the link to invite him to your
 
 ## Functionality
 
-Eggbort's functionality comes in the form of server management QOL improvements, such as easier chat management, bot interaction modification, as well as fully-functional music player capabilities from sources such as YouTube, Soundcloud, and more. Once you invite Eggbort to your Discord server, type `e.help` in a text channel to display a list of commands.
+Eggbort's functionality comes in the form of server management QOL improvements, such as easier chat management, bot interaction customization, as well as fully-functional music player capabilities from sources such as YouTube, Soundcloud, and more*. Once you invite Eggbort to your Discord server, type `e.help` in a text channel to display a list of commands.
+
+*Other sources include: Bandcamp, Vimeo, Twitch streams, Local files, and HTTP URLs
 
 ## Implementation
 
