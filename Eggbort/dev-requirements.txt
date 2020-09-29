@@ -6,7 +6,7 @@ autopep8==1.5.4
 cffi==1.14.0
 chardet==3.0.4
 discord-ext-menus==1.0.0a26+g84caae8
-discord.py==1.4.1
+discord.py==1.5.0
 humanize==2.6.0
 idna==2.10
 idna-ssl==1.1.0
