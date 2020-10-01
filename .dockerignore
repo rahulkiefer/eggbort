@@ -1,0 +1,11 @@
+# general
+.gitignore
+LICENSE
+README.md
+
+# my todo list
+todo
+
+# python files
+__pycache__/
+env/
