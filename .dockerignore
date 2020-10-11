@@ -1,5 +1,7 @@
 # general
+.vscode
 .gitignore
+docker-network-create.sh
 LICENSE
 README.md
 
