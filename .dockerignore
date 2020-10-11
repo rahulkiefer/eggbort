@@ -9,3 +9,4 @@ todo
 # python files
 __pycache__/
 env/
+Eggbort/dev-requirements.txt
