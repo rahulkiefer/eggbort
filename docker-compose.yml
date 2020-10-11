@@ -16,7 +16,18 @@ services:
     networks:
       - eggnet
     depends_on:
+      - db
       - lavalink
+    restart: always
+
+  db:
+    container_name: mongodb
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME: root
+      - MONGO_INITDB_ROOT_PASSWORD: poggo_db
+    networks:
+      - eggnet
     restart: always
 
   lavalink:
