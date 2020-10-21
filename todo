@@ -1,0 +1,58 @@
+--- General ---
+- set up external DB to handle things like 'serverprefix' command functionality
+
+- update README to talk about use of Docker and Lavalink, etc.
+- eventually update README with invite link for exact permissions that Eggbort
+  needs to use all functionality on a server (i.e. not "Admin," but only the specifics)
+  
+- create a static webpage that contains an invite link and short bot description
+  --> e.g. http://septapus.com/
+  (including: to be able to add him, you need the following server privileges: ...)
+  rahulkiefer.com/eggbort
+
+create a .dockerignore file
+
+--- COGS ------
+
+Help:
+  Restructure command categories so there are less categories that are more encompassing:
+    1. Music - ...
+    2. Server Tools - avatar, joindate, chatclear (alias clear), poll
+    3. Bot Properties - ping, serverprefix
+
+Bot Properties:
+ - serverprefix: use mongodb Docker image, or MongoDB on a separate instance
+
+Poll:
+ - raffle/giveaway
+
+Reminder:
+ - see Septapus functionality
+ - would need to make use of aforementioned external DB
+
+User Info:
+ - e.avatar should return the invoker's own pfp if not argument is provided
+
+Music:
+ - bot seems to disconnect itself after not detecting any voice activity for 5
+   minutes (this is a problem bc ppl can still be listening to the music while
+   not talking/being mute, and the bot would disconnect on them)
+   --> maybe change to: leave if bot is alone in call for 5 minutes
+ - command to list how much time is left in current song playing (and/or entire queue)
+ - study Fredboat interaction (e.g. what happens when he's forcibly disconnected
+   and recreate this behavior for Eggbort)
+
+!!! Catch OSError (occurs whenever bot container tries to connect to lavalink container before it's rdy)
+and make it throw an exception that causes the bot container to stop completely
+(this way, since the docker-compose file tells the bot to restart upon failing with an error,
+i won't have to manually restart the bot every time I rebuild the image after making code changes)
+
+
+--- Docker Network Creation Command ---
+docker network create -d bridge \
+--attachable \
+--opt com.docker.network.bridge.name=egg0 \
+--opt com.docker.network.bridge.enable_ip_masquerade=true \
+--opt com.docker.network.bridge.enable_icc=true \
+--opt com.docker.network.bridge.host_binding_ipv4=0.0.0.0 \
+eggnet
