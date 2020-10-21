@@ -4,6 +4,7 @@ todo
 # python files
 __pycache__/
 env/
+venv/
 
 # vscode settings
 .vscode

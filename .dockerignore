@@ -11,4 +11,5 @@ todo
 # python files
 __pycache__/
 env/
+venv/
 Eggbort/dev-requirements.txt
