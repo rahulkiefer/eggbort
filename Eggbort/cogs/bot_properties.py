@@ -1,8 +1,9 @@
 # Built-in library imports
-import json
+# import json
 
 # discord.py imports
-from discord import Activity, ActivityType, Status
+import discord
+from discord import app_commands
 from discord.ext import commands
 
 
@@ -15,19 +16,6 @@ class BotProperties(commands.Cog):
         self.bot = bot
 
     ##### EVENTS #############################################################
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        """Sets the bot's status and activity upon booting up"""
-
-        await self.bot.change_presence(
-            status=Status.online,
-            activity=Activity(
-                type=ActivityType.playing,
-                name='e.help'
-            )
-        )
-        print('Bot is ready.')  # for debugging purposes
 
     # TODO re-implement with external DB to store prefixes
     # @commands.Cog.listener()
@@ -56,10 +44,24 @@ class BotProperties(commands.Cog):
 
     ##### COMMANDS ###########################################################
 
-    @commands.command()
-    async def ping(self, ctx):
-        """Displays the bot's latency"""
-        await ctx.send('Latency: {} ms'.format(round(self.bot.latency * 1000)))
+    @app_commands.command(name='ping', description="Displays the bot's latency")
+    async def ping(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Latency {round(self.bot.latency * 1000)} ms")
+
+    # @commands.command()
+    # @commands.is_owner()
+    # async def sync(self, ctx):
+    #     # TODO delete
+    #     await self.bot.tree.sync()
+    #     synced_cmds = await self.bot.tree.sync()   # https://stackoverflow.com/questions/74413367/how-to-sync-slash-command-globally-discord-py
+    #     await ctx.send(f"Synced the following commands: {f'{cmd}, ' for cmd in synced_cmds}")
+
+    # @app_commands.command(name='sync', description="Syncs slash commands with all guilds")
+    # @commands.is_owner()
+    # async def sync(self):
+    #     """Syncs slash commands with all guilds."""
+    #     synced_cmds = await self.bot.tree.sync()   # https://stackoverflow.com/questions/74413367/how-to-sync-slash-command-globally-discord-py
+    #     ctx.send(f"Synced the following commands: {f'{cmd}, ' for cmd in synced_cmds}")
 
     # TODO re-implement with external DB to store prefixes
     # @commands.command()
@@ -96,5 +98,5 @@ class BotProperties(commands.Cog):
     #         )
 
 
-def setup(bot):
-    bot.add_cog(BotProperties(bot))
+async def setup(bot):
+    await bot.add_cog(BotProperties(bot))

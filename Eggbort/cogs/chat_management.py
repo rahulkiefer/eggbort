@@ -9,6 +9,7 @@ class ChatManagement(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # TODO will have to find the new way to implement this with slash commands
     @commands.command(aliases=['delete'])
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, n_messages: int=1):
@@ -25,5 +26,5 @@ class ChatManagement(commands.Cog):
             await ctx.channel.purge(limit=n_messages + 1)
 
 
-def setup(bot):
-    bot.add_cog(ChatManagement(bot))
+async def setup(bot):
+    await bot.add_cog(ChatManagement(bot))

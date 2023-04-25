@@ -19,7 +19,7 @@ class UserInfo(commands.Cog):
     async def avatar(self, ctx):
         '''Sends the user's avatar as a file that can be copied.'''
         user = ctx.message.mentions[0]
-        url = f'{user.avatar_url}'
+        url = f'{user.avatar}'
 
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as resp:
@@ -36,5 +36,5 @@ class UserInfo(commands.Cog):
         await ctx.send(ctx.message.mentions[0].joined_at)
 
 
-def setup(bot):
-    bot.add_cog(UserInfo(bot))
+async def setup(bot):
+    await bot.add_cog(UserInfo(bot))

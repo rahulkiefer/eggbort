@@ -1,5 +1,5 @@
 # discord.py imports
-from discord import Embed, Color
+from discord import app_commands, Embed, Color
 from discord.ext import commands
 
 # dictionary of all individual bot command embeds
@@ -319,6 +319,6 @@ class Help(commands.Cog):
             await ctx.send(embed=help_embed)
 
 
-def setup(bot):
+async def setup(bot):
     bot.remove_command('help')  # removes default help command
-    bot.add_cog(Help(bot))
+    await bot.add_cog(Help(bot))
