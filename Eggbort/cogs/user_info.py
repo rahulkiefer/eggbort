@@ -1,4 +1,4 @@
-# built-in library imports
+"""standard imports"""
 import io
 
 # discord.py imports
@@ -37,4 +37,5 @@ class UserInfo(commands.Cog):
 
 
 async def setup(bot):
+    """Adds the UserInfo cog"""
     await bot.add_cog(UserInfo(bot))

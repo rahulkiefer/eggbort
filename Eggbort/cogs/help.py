@@ -1,228 +1,228 @@
-# discord.py imports
-from discord import app_commands, Embed, Color
+"""discord.py imports"""
+from discord import Embed, Color
 from discord.ext import commands
 
 # dictionary of all individual bot command embeds
 eggbort_commands = {
     # Bot Properties
     'ping': Embed(
-                title='ping',
-                description='''
+        title='ping',
+        description='''
                             Displays the bot's latency.
 
                             `e.ping`
                             ''',
-                color=Color.green(),
-            ),
+        color=Color.green(),
+    ),
     # Chat Management
     'clear': Embed(
-                title='clear',
-                description='''
+        title='clear',
+        description='''
                             Deletes the given number of messages.
                             Arguments:
                             amount (default: 1)
 
                             `e.clear [amount]`
                             ''',
-                color=Color.lighter_grey(),
-            ).add_field(
-                name='Aliases',
-                value='delete',
-            ),
+        color=Color.lighter_grey(),
+    ).add_field(
+        name='Aliases',
+        value='delete',
+    ),
     # Help
     'help': Embed(
-                title='help',
-                description='''
+        title='help',
+        description='''
                             Gives bot command descriptions.
                             Arguments:
                             command (optional | default: None)
 
                             `e.help [command]`
                             ''',
-                color=Color.purple(),
-            ),
+        color=Color.purple(),
+    ),
     # Music
     'connect': Embed(
-                title='connect',
-                description='''
+        title='connect',
+        description='''
                             Connect to a voice channel.
 
                             `e.connect`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'play': Embed(
-                title='play',
-                description='''
+        title='play',
+        description='''
                             Play or queue a song with the given query.
                             Arguments:
                             query (default: None)
 
                             `e.play [query]`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'pause': Embed(
-                title='pause',
-                description='''
+        title='pause',
+        description='''
                             Pause the currently playing song.
 
                             `e.pause`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'resume': Embed(
-                title='resume',
-                description='''
+        title='resume',
+        description='''
                             Resume a currently paused player.
 
                             `e.resume`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'skip': Embed(
-                title='skip',
-                description='''
+        title='skip',
+        description='''
                             Skip the currently playing song.
 
                             `e.skip`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'stop': Embed(
-                title='stop',
-                description='''
+        title='stop',
+        description='''
                             Stop the player and clear all internal states.
 
                             `e.stop`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     'volume': Embed(
-                title='volume',
-                description='''
+        title='volume',
+        description='''
                             Change the player's volume, between 1 and 100.
                             Arguments:
                             volume (default: None)
 
                             `e.volume [volume]`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='v, vol',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='v, vol',
+    ),
     'shuffle': Embed(
-                title='shuffle',
-                description='''
+        title='shuffle',
+        description='''
                             Shuffle the player's queue.
 
                             `e.shuffle`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='mix',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='mix',
+    ),
     'equalizer': Embed(
-                title='equalizer',
-                description='''
+        title='equalizer',
+        description='''
                             Change the player's equalizer.
                             Arguments:
                             equalizer (default: None)
 
                             `e.equalizer`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='eq',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='eq',
+    ),
     'queue': Embed(
-                title='queue',
-                description='''
+        title='queue',
+        description='''
                             Display the player's queued songs.
 
                             `e.queue`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='q, que',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='q, que',
+    ),
     'nowplaying': Embed(
-                title='nowplaying',
-                description='''
+        title='nowplaying',
+        description='''
                             Update the player controller.
 
                             `e.nowplaying`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='np, now_playing, current',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='np, now_playing, current',
+    ),
     'swap_dj': Embed(
-                title='nowplaying',
-                description='''
+        title='nowplaying',
+        description='''
                             Swap the current DJ to another member in the voice channel.
                             Arguments:
                             user (default: None)
 
                             `e.swap_dj <@user>`
                             ''',
-                color=Color.red(),
-            ).add_field(
-                name='Aliases',
-                value='swap',
-            ),
+        color=Color.red(),
+    ).add_field(
+        name='Aliases',
+        value='swap',
+    ),
     # Poll
     'poll': Embed(
-                title='poll',
-                description='''
+        title='poll',
+        description='''
                             Creates a poll using reactions on the message.
                             Arguments:
                             message (optional | default: None)
 
                             `e.poll [message]`
                             ''',
-                color=Color.red(),
-            ),
+        color=Color.red(),
+    ),
     # User Info
     'avatar': Embed(
-                title='avatar',
-                description='''
+        title='avatar',
+        description='''
                             Sends the avatar of the specified user.
                             Arguments:
                             user
 
                             `e.avatar <@user>`
                             ''',
-                color=Color.blue(),
-            ).add_field(
-                name='Aliases',
-                value='pfp',
-            ),
+        color=Color.blue(),
+    ).add_field(
+        name='Aliases',
+        value='pfp',
+    ),
     'joindate': Embed(
-                title='joindate',
-                description='''
+        title='joindate',
+        description='''
                             Gives the date the user first joined the server.
                             Arguments:
                             user
 
                             `e.joindate <@user>`
                             ''',
-                color=Color.blue(),
-            ),
+        color=Color.blue(),
+    ),
 }
 
 
 # embed for overall help command call
 help_embed = Embed(
-                title='Eggbort Commands',
-                description='Call help on specific commands to get more info.',
-                color=Color.gold(),
-            )
+    title='Eggbort Commands',
+    description='Call help on specific commands to get more info.',
+    color=Color.gold(),
+)
 
 help_embed.set_footer(
     text='Bot developed by rdk750#9435',
@@ -289,6 +289,7 @@ help_embed.add_field(
     inline=True,
 )
 
+
 class Help(commands.Cog):
     """
     Commands related to giving bot command descriptions.
@@ -310,8 +311,8 @@ class Help(commands.Cog):
 
             await ctx.send(
                 embed=eggbort_commands.get(
-                          cmd,
-                          Embed(description=f'{cmd} is not a command.')
+                    cmd,
+                    Embed(description=f'{cmd} is not a command.')
                 )
             )
 
@@ -320,5 +321,6 @@ class Help(commands.Cog):
 
 
 async def setup(bot):
+    """Adds the Help cog"""
     bot.remove_command('help')  # removes default help command
     await bot.add_cog(Help(bot))

@@ -1,5 +1,4 @@
-# Built-in library imports
-import asyncio
+"""standard imports"""
 import logging
 import os
 
@@ -11,25 +10,14 @@ from discord.ext import commands
 
 logging.basicConfig(level=logging.DEBUG)
 
-# TODO re-implement with external DB to store prefixes
-# def retrieve_prefix(bot, message):
-#     """Returns server prefix for current server on bot startup"""
-
-#     with open(file_paths.SERVER_PREFIXES) as f:
-#         server_prefixes = json.load(f)
-
-#     guild_id = str(message.guild.id)
-
-#     if server_prefixes[guild_id] is None:
-#         return ('egg!', server_prefixes[guild_id])
-
 
 class Eggbort(commands.Bot):
+    """Contains setup needed for bot to successfully start and load commands"""
+
     def __init__(self):
         super().__init__(
             command_prefix='e.',
-            intents=discord.Intents().all(),
-            owner_id='220377491926286337'  #  my Discord user ID
+            intents=discord.Intents().all()
         )
 
         self.cog_list = (
@@ -39,9 +27,9 @@ class Eggbort(commands.Bot):
             'cogs.help',  # need to migrate to slash cmds
             'cogs.new_music',   # need to migrate to slash cmds
             'cogs.poll',  # need to migrate to slash cmds
-            'cogs.user_info', # need to migrate to slash cmds
+            'cogs.user_info',  # need to migrate to slash cmds
         )
-    
+
     async def on_ready(self) -> None:
         """Sets the bot's status and activity upon booting up."""
 
@@ -55,18 +43,21 @@ class Eggbort(commands.Bot):
         logging.debug('Bot is ready.')  # for debugging purposes
 
     async def setup_hook(self) -> None:
-        """Performs asynchronous setup after the bot is logged in but before it has connected to the Websocket."""
+        """Performs asynchronous setup after the bot is logged in but before it
+        has connected to the Websocket.
+        """
 
         # cogs
         for ext in self.cog_list:
             try:
                 await self.load_extension(ext)
-                logging.debug(f"Loaded {ext}")
+                logging.debug("Loaded %s", ext)
             except Exception as _e:
-                logging.debug(f'Failed to load extension {ext}.')
+                logging.debug("Failed to load extension: %s", ext)
 
         # Wavelink
-        node: wavelink.Node = wavelink.Node(uri='http://lavalink:2333', password='youshallnotpass')
+        node: wavelink.Node = wavelink.Node(
+            uri='http://lavalink:2333', password='youshallnotpass')
         await wavelink.NodePool.connect(client=self, nodes=[node])
 
     # async def on_command_error(self, ctx, error):

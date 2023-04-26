@@ -1,8 +1,11 @@
-import discord
-from discord.ext import commands
+"""standard imports"""
 import logging
 
+# discord.py imports
+from discord.ext import commands
+
 logging.basicConfig(level=logging.DEBUG)
+
 
 class Debugging(commands.Cog):
     """Commands related to testing the bot after changes to the code have been
@@ -15,35 +18,39 @@ class Debugging(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    # @commands.is_owner()
+    @commands.is_owner()
     async def load(self, ctx, extension):
         """Manually loads a specified cog"""
 
-        await self.bot.load_extension('cogs.{}'.format(extension))
-        logging.debug('{} was loaded'.format(extension))
+        await self.bot.load_extension(f'cogs.{extension}')
+        logging.debug('%s was loaded', extension)
 
     @commands.command()
-    # @commands.is_owner()
+    @commands.is_owner()
     async def unload(self, ctx, extension):
         """Manually unloads a specified cog"""
 
-        await self.bot.unload_extension('cogs.{}'.format(extension))
-        logging.debug('{} was unloaded'.format(extension))
+        await self.bot.unload_extension(f'cogs.{extension}')
+        logging.debug('%s was unloaded', extension)
 
     @commands.command()
-    # @commands.is_owner()
+    @commands.is_owner()
     async def reload(self, ctx, extension):
         """Manually reloads a specified cog"""
 
-        await self.bot.unload_extension('cogs.{}'.format(extension))
-        await self.bot.load_extension('cogs.{}'.format(extension))
-        logging.debug('{} was reloaded'.format(extension))
+        await self.bot.unload_extension(f'cogs.{extension}')
+        await self.bot.load_extension(f'cogs.{extension}')
+        logging.debug('%s was reloaded', extension)
 
     @commands.command()
+    @commands.is_owner()
     async def sync(self, ctx):
-        synced_cmds = await self.bot.tree.sync()   # https://stackoverflow.com/questions/74413367/how-to-sync-slash-command-globally-discord-py
+        """Syncs slash commands with all guilds"""
+
+        synced_cmds = await self.bot.tree.sync()
         await ctx.send(f"Synced {len(synced_cmds)} commands")
 
 
 async def setup(bot: commands.Bot) -> None:
+    """Adds the Debugging cog"""
     await bot.add_cog(Debugging(bot))

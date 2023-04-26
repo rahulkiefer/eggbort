@@ -1,8 +1,9 @@
-import discord
+"""discord.py imports"""
 import wavelink
 from discord.ext import commands
 
 # TODO will have to find the new way to implement this with slash commands
+
 
 class NewMusic(commands.Cog):
     """Updated commands that relate to playing music."""
@@ -33,4 +34,5 @@ class NewMusic(commands.Cog):
 
 
 async def setup(bot: commands.Bot):
+    """Adds the NewMusic cog"""
     await bot.add_cog(NewMusic(bot))

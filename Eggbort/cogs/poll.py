@@ -1,3 +1,4 @@
+"""discord.py imports"""
 from discord.ext import commands
 
 
@@ -22,4 +23,5 @@ class Poll(commands.Cog):
 
 
 async def setup(bot):
+    """Adds the Poll cog"""
     await bot.add_cog(Poll(bot))

@@ -1,3 +1,4 @@
+"""discord.py imports"""
 from discord.ext import commands
 
 
@@ -12,7 +13,7 @@ class ChatManagement(commands.Cog):
     # TODO will have to find the new way to implement this with slash commands
     @commands.command(aliases=['delete'])
     @commands.has_permissions(manage_messages=True)
-    async def clear(self, ctx, n_messages: int=1):
+    async def clear(self, ctx, n_messages: int = 1):
         """
         Deletes the given number of messages above (default is 1)
 
@@ -27,4 +28,5 @@ class ChatManagement(commands.Cog):
 
 
 async def setup(bot):
+    """Adds the ChatManagement cog"""
     await bot.add_cog(ChatManagement(bot))

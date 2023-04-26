@@ -1,4 +1,7 @@
---- General ---
+# TODO
+
+## General
+
 - set up external DB to handle things like 'serverprefix' command functionality
 
 - update README to talk about use of Docker and Lavalink, etc.
@@ -6,40 +9,123 @@
   needs to use all functionality on a server (i.e. not "Admin," but only the specifics)
   
 - create a static webpage that contains an invite link and short bot description
-  --> e.g. http://septapus.com/
+  --> e.g. [Septapus page](http://septapus.com/)
   (including: to be able to add him, you need the following server privileges: ...)
   rahulkiefer.com/eggbort
 
-create a .dockerignore file
+- change all existing commands (besides sync and debugs) to slash commands
 
---- COGS ------
+- change Ubuntu image to python image now that we don't need the Rapptz extension package
 
-Help:
-  Restructure command categories so there are less categories that are more encompassing:
+## COGS
+
+### Help
+
+Restructure command categories so there are less categories that are more encompassing:
     1. Music - ...
     2. Server Tools - avatar, joindate, chatclear (alias clear), poll
     3. Bot Properties - ping, serverprefix
 
-Bot Properties:
- - serverprefix: use mongodb Docker image, or MongoDB on a separate instance
+### Bot Properties
 
-Poll:
- - raffle/giveaway
+    - serverprefix: use mongodb Docker image, or MongoDB on a separate instance
 
-Reminder:
- - see Septapus functionality
- - would need to make use of aforementioned external DB
+    ```
+    def retrieve_prefix(bot, message):
+    """Returns server prefix for current server on bot startup"""
 
-User Info:
- - e.avatar should return the invoker's own pfp if not argument is provided
+    with open(file_paths.SERVER_PREFIXES) as f:
+        server_prefixes = json.load(f)
 
-Music:
- - bot seems to disconnect itself after not detecting any voice activity for 5
+    guild_id = str(message.guild.id)
+
+    if server_prefixes[guild_id] is None:
+        return ('egg!', server_prefixes[guild_id])
+    ```
+
+    ```
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def serverprefix(self, ctx, *args):
+        """
+        Shows (changes) the server prefix (w/ argument)
+
+        If the call has an argument, changes the prefix to the argument.
+        """
+
+        with open(file_paths.SERVER_PREFIXES, 'r') as f:
+            server_prefix = json.load(f)
+
+        # if an argument for serverprefix has been given, set it as the new
+        # prefix
+        if len(args) > 0:
+            new_prefix = ' '.join(args)
+            server_prefix[str(ctx.guild.id)] = new_prefix
+
+            with open(file_paths.SERVER_PREFIXES, 'w') as f:
+                json.dump(server_prefix, f, indent=4)
+
+            await ctx.send(
+                'Server prefix has been updated to: {}'.format(new_prefix)
+            )
+
+        # otherwise just list the current server prefix
+        else:
+            await ctx.send(
+                'Current server prefix is: {}'.format(
+                    server_prefix[str(ctx.guild.id)]
+                )
+            )
+    ```
+
+    ```
+    # TODO re-implement with external DB to store prefixes
+    @commands.Cog.listener()
+    async def on_guild_join(self, guild):
+        """Adds the 'e.' server prefix upon joining a server."""
+
+        with open(file_paths.SERVER_PREFIXES, 'r') as f:
+            server_prefixes = json.load(f)
+
+        server_prefixes[str(guild.id)] = 'e.'  # adds the default bot prefix
+
+        with open(file_paths.SERVER_PREFIXES, 'w') as f:
+            json.dump(server_prefixes, f, indent=4)
+
+    @commands.Cog.listener()
+    async def on_guild_remove(self, guild):
+        """Removes current server prefix upon leaving a server."""
+
+        with open(file_paths.SERVER_PREFIXES, 'r') as f:
+            server_prefixes = json.load(f)
+
+        del server_prefixes[str(guild.id)]
+
+        with open(file_paths.SERVER_PREFIXES, 'w') as f:
+            json.dump(server_prefixes, f, indent=4)
+    ```
+
+### Poll
+
+- raffle/giveaway
+
+### Reminder
+
+- see Septapus functionality
+- would need to make use of aforementioned external DB
+
+### User Info
+
+- e.avatar should return the invoker's own pfp if not argument is provided
+
+### Music
+
+- bot seems to disconnect itself after not detecting any voice activity for 5
    minutes (this is a problem bc ppl can still be listening to the music while
    not talking/being mute, and the bot would disconnect on them)
    --> maybe change to: leave if bot is alone in call for 5 minutes
- - command to list how much time is left in current song playing (and/or entire queue)
- - study Fredboat interaction (e.g. what happens when he's forcibly disconnected
+- command to list how much time is left in current song playing (and/or entire queue)
+- study Fredboat interaction (e.g. what happens when he's forcibly disconnected
    and recreate this behavior for Eggbort)
 
 !!! Catch OSError (occurs whenever bot container tries to connect to lavalink container before it's rdy)
@@ -47,12 +133,12 @@ and make it throw an exception that causes the bot container to stop completely
 (this way, since the docker-compose file tells the bot to restart upon failing with an error,
 i won't have to manually restart the bot every time I rebuild the image after making code changes)
 
+## Docker Network Creation Command
 
---- Docker Network Creation Command ---
-docker network create -d bridge \
+`docker network create -d bridge \
 --attachable \
 --opt com.docker.network.bridge.name=egg0 \
 --opt com.docker.network.bridge.enable_ip_masquerade=true \
 --opt com.docker.network.bridge.enable_icc=true \
 --opt com.docker.network.bridge.host_binding_ipv4=0.0.0.0 \
-eggnet
+eggnet`

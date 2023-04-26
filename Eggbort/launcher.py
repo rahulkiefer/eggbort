@@ -1,12 +1,12 @@
+"""Module providing custom discord bot"""
 from eggbort import Eggbort
 
-def run_bot():
-  bot = Eggbort()
-  bot.run()
 
 def main():
-  '''Launches Eggbort'''
-  run_bot()
+    '''Launches Eggbort'''
+    bot = Eggbort()
+    bot.run()
+
 
 if __name__ == '__main__':
-  main()
+    main()
