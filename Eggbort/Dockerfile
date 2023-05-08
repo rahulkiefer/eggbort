@@ -1,16 +1,10 @@
-FROM ubuntu:latest
-
-RUN apt update && \
-    apt upgrade -y && \
-    apt install -y git && \
-    apt install -y python3-pip
+FROM python:3
 
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
-RUN pip3 install --no-cache-dir -r requirements.txt
-RUN pip3 install --no-cache-dir -U git+https://github.com/Rapptz/discord-ext-menus.git
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "./launcher.py" ]
+CMD [ "python", "./launcher.py" ]
