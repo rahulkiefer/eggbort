@@ -1,4 +1,5 @@
-"""discord.py imports"""
+import discord
+from discord import app_commands
 from discord.ext import commands
 
 
@@ -13,15 +14,25 @@ class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def poll(self, ctx):
-        """Creates a poll using reactions on the creator's message"""
-        message = ctx.message
-        await message.add_reaction('👍')
-        await message.add_reaction('👎')
-        await message.add_reaction('🤷')
+    @app_commands.command(name='poll', description="Creates a poll using reactions.")
+    async def poll(self, interaction: discord.Interaction, question: str):
+        """Creates a poll using reactions."""
+        embed = discord.Embed(
+            title="Poll",
+            description=question,
+            color=discord.Color.from_rgb(255, 215, 154)
+        )
+        embed.set_footer(
+            text=f"Vote with the reactions below."
+        )
+
+        await interaction.response.send_message(embed=embed)
+
+        sent_msg = await interaction.original_response()
+        await sent_msg.add_reaction('👍')
+        await sent_msg.add_reaction('👎')
+        await sent_msg.add_reaction('🤷')
 
 
 async def setup(bot):
-    """Adds the Poll cog"""
     await bot.add_cog(Poll(bot))

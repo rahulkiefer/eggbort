@@ -1,10 +1,8 @@
-"""standard imports"""
+# standard imports
 import logging
 
 # discord.py imports
 from discord.ext import commands
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 class Debugging(commands.Cog):
@@ -23,7 +21,7 @@ class Debugging(commands.Cog):
         """Manually loads a specified cog"""
 
         await self.bot.load_extension(f'cogs.{extension}')
-        logging.debug('%s was loaded', extension)
+        logging.info('%s was loaded', extension)
 
     @commands.command()
     @commands.is_owner()
@@ -31,16 +29,15 @@ class Debugging(commands.Cog):
         """Manually unloads a specified cog"""
 
         await self.bot.unload_extension(f'cogs.{extension}')
-        logging.debug('%s was unloaded', extension)
+        logging.info('%s was unloaded', extension)
 
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, extension):
         """Manually reloads a specified cog"""
 
-        await self.bot.unload_extension(f'cogs.{extension}')
-        await self.bot.load_extension(f'cogs.{extension}')
-        logging.debug('%s was reloaded', extension)
+        await self.bot.reload_extension(f'cogs.{extension}')
+        logging.info('%s was reloaded', extension)
 
     @commands.command()
     @commands.is_owner()
@@ -52,5 +49,4 @@ class Debugging(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    """Adds the Debugging cog"""
     await bot.add_cog(Debugging(bot))

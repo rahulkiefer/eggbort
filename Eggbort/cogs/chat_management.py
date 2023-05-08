@@ -1,4 +1,5 @@
-"""discord.py imports"""
+import discord
+from discord import app_commands
 from discord.ext import commands
 
 
@@ -10,23 +11,25 @@ class ChatManagement(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # TODO will have to find the new way to implement this with slash commands
-    @commands.command(aliases=['delete'])
-    @commands.has_permissions(manage_messages=True)
-    async def clear(self, ctx, n_messages: int = 1):
+    @app_commands.command(name='clear', description="Deletes the specified number of messages above.")
+    @app_commands.checks.has_permissions(manage_messages=True)
+    async def clear(self, interaction: discord.Interaction, amount: int):
         """
-        Deletes the given number of messages above (default is 1)
+        Deletes the specified number of messages above.
 
         By default, with no number given, the clear command itself and the
         message above it will be deleted.
         """
-        if n_messages < 1:
-            msg = await ctx.send('Cannot clear less than 1 message.')
-            await msg.delete(delay=1)
+        if amount < 1:
+            await interaction.response.send_message(
+                content="Cannot clear less than 1 message.",
+                ephemeral=True
+            )
+            await interaction.message.delete()
         else:
-            await ctx.channel.purge(limit=n_messages + 1)
+            await interaction.response.defer()
+            await interaction.channel.purge(limit=amount + 1)
 
 
 async def setup(bot):
-    """Adds the ChatManagement cog"""
     await bot.add_cog(ChatManagement(bot))

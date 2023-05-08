@@ -1,8 +1,9 @@
-"""standard imports"""
+# standard imports
 import io
 
 # discord.py imports
-import discord.file
+import discord
+from discord import app_commands
 from discord.ext import commands
 
 # external packages
@@ -10,32 +11,28 @@ import aiohttp
 
 
 class UserInfo(commands.Cog):
-    '''Commands related to retrieving user info.'''
+    """Commands related to retrieving user info."""
 
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['pfp'])
-    async def avatar(self, ctx):
-        '''Sends the user's avatar as a file that can be copied.'''
-        user = ctx.message.mentions[0]
-        url = f'{user.avatar}'
-
+    @app_commands.command(name='pfp', description="Sends the user's profile picture as a jpg.")
+    async def pfp(self, interaction: discord.Interaction, member: discord.Member):
+        "Sends the user's profile picture as a jpg."
         async with aiohttp.ClientSession() as session:
-            async with session.get(url) as resp:
-                if resp.status != 200:
-                    return await ctx.send('Could not download file...')
-                data = io.BytesIO(await resp.read())
-                await ctx.send(
-                    file=discord.File(data, f'{user.name}_avatar.jpg')
+            async with session.get(member.avatar.url) as response:
+                if response.status != 200:
+                    return await interaction.response.send_message("Could not download file...")
+                data = io.BytesIO(await response.read())
+                await interaction.response.send_message(
+                    file=discord.File(data, f'{member.name}_avatar.jpg')
                 )
 
-    @commands.command()
-    async def joindate(self, ctx):
-        '''Gives the date the member first joined the server (UTC format).'''
-        await ctx.send(ctx.message.mentions[0].joined_at)
+    @app_commands.command(name='joindate', description="Sends the date the member first joined this server (UTC format).")
+    async def joindate(self, interaction: discord.Interaction, member: discord.Member):
+        """Sends the date the member first joined this server (UTC format)."""
+        await interaction.response.send_message(member.joined_at)
 
 
 async def setup(bot):
-    """Adds the UserInfo cog"""
     await bot.add_cog(UserInfo(bot))

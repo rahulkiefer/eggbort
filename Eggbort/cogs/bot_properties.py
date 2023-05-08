@@ -1,4 +1,3 @@
-"""discord.py imports"""
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -23,5 +22,4 @@ class BotProperties(commands.Cog):
 
 
 async def setup(bot):
-    """Adds the BotProperties cog"""
     await bot.add_cog(BotProperties(bot))
