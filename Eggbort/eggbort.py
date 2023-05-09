@@ -1,14 +1,19 @@
-"""standard imports"""
+# standard imports
 import logging
 import os
 
 # discord.py imports
 import discord
-import wavelink
 from discord import Activity, ActivityType, Status
 from discord.ext import commands
 
-logging.basicConfig(level=logging.DEBUG)
+# external packges
+import wavelink
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('discord')
+logger.setLevel(logging.INFO)
+logging.getLogger('discord.http').setLevel(logging.DEBUG)
 
 
 class Eggbort(commands.Bot):
@@ -22,12 +27,13 @@ class Eggbort(commands.Bot):
 
         self.cog_list = (
             'cogs.bot_properties',
-            'cogs.chat_management',    # need to migrate to slash cmds
-            'cogs.debugging',   # need to migrate to slash cmds
-            'cogs.help',  # need to migrate to slash cmds
-            'cogs.new_music',   # need to migrate to slash cmds
-            'cogs.poll',  # need to migrate to slash cmds
-            'cogs.user_info',  # need to migrate to slash cmds
+            'cogs.chat_management',
+            'cogs.debugging',
+            'cogs.fun',
+            'cogs.help',
+            'cogs.music',
+            'cogs.poll',
+            'cogs.user_info',
         )
 
     async def on_ready(self) -> None:
@@ -37,10 +43,10 @@ class Eggbort(commands.Bot):
             status=Status.online,
             activity=Activity(
                 type=ActivityType.playing,
-                name='e.help'
+                name='/help'
             )
         )
-        logging.debug('Bot is ready.')  # for debugging purposes
+        logging.info('Bot is ready.')  # for debugging purposes
 
     async def setup_hook(self) -> None:
         """Performs asynchronous setup after the bot is logged in but before it
@@ -51,9 +57,9 @@ class Eggbort(commands.Bot):
         for ext in self.cog_list:
             try:
                 await self.load_extension(ext)
-                logging.debug("Loaded %s", ext)
+                logging.info("Loaded %s", ext)
             except Exception as _e:
-                logging.debug("Failed to load extension: %s", ext)
+                logging.info("Failed to load extension: %s", ext)
 
         # Wavelink
         node: wavelink.Node = wavelink.Node(
@@ -79,4 +85,4 @@ class Eggbort(commands.Bot):
     #         )
 
     def run(self) -> None:
-        super().run(os.environ['EGGBORT_TOKEN'])
+        super().run(os.environ['EGGBORT_TOKEN'], log_handler=None)
