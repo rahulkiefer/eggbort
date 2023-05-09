@@ -53,6 +53,11 @@ class Eggbort(commands.Bot):
         has connected to the Websocket.
         """
 
+        # Wavelink
+        node: wavelink.Node = wavelink.Node(
+            uri='http://lavalink:2333', password='youshallnotpass')
+        await wavelink.NodePool.connect(client=self, nodes=[node])
+
         # cogs
         for ext in self.cog_list:
             try:
@@ -60,11 +65,6 @@ class Eggbort(commands.Bot):
                 logging.info("Loaded %s", ext)
             except Exception as _e:
                 logging.info("Failed to load extension: %s", ext)
-
-        # Wavelink
-        node: wavelink.Node = wavelink.Node(
-            uri='http://lavalink:2333', password='youshallnotpass')
-        await wavelink.NodePool.connect(client=self, nodes=[node])
 
     # async def on_command_error(self, ctx, error):
     #     '''General error-handling for commands.'''

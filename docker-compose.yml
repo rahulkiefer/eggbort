@@ -16,8 +16,10 @@ services:
     networks:
       - eggnet
     depends_on:
-      - db
-      - lavalink
+      db:
+        condition: service_completed_successfully
+      lavalink:
+        condition: service_completed_successfully
     restart: always
 
   db:
