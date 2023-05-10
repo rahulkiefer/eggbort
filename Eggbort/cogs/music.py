@@ -46,7 +46,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     async def playYouTubePlaylist(self, interaction: discord.Interaction, vc: CustomPlayer, link: str):
         embed = discord.Embed(description="Searching", color=discord.Color.from_str("rgb(0,0,0)"))
-        await interaction.respose.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed)
         try:
             embed = discord.Embed(description=f"[Playlist added to queue]({link})", color=discord.Color.from_str("rgb(0,0,0)"))
             playlist = await wavelink.YouTubePlaylist.search(link)
@@ -111,6 +111,8 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
     @app_commands.checks.has_permissions(speak=True)
     async def stop(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
+        if not vc.queue.is_empty:
+            vc.queue.clear()
         if vc.is_playing():
             await vc.stop()
             await interaction.response.send_message("Stopped player.")
