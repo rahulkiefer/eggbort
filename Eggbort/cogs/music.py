@@ -22,6 +22,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     @app_commands.command(name='play', description="Play a song")
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def play(self, interaction: discord.Interaction, query_or_link: str):
         """Play a song with the given search query.
 
@@ -79,6 +80,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     @app_commands.command(name='pause', description="Pause the player") # TODO can I delete the message after playing is resumed?
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def pause(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if vc.is_paused():
@@ -91,6 +93,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     @app_commands.command(name='resume', description="Resume the player")
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def resume(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if vc.is_paused():
@@ -101,14 +104,16 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     @app_commands.command(name='skip', description="Skips the current song in the queue")
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def skip(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if not vc.queue.is_empty:
+            await interaction.response.send_message(f"Skipped. Now playing: `{vc.queue.get()}`.")
             await vc.stop()
-            await interaction.response.send_message(f"Now playing: `{vc.queue[0]}`")
 
     @app_commands.command(name='stop', description="Stops playing and clears queue")
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def stop(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if not vc.queue.is_empty:
@@ -121,6 +126,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
 
     @app_commands.command(name='disconnect', description="Leave a voice channel")
     @app_commands.checks.has_permissions(speak=True)
+    @user_in_vc()
     async def disconnect(self, interaction: discord.Interaction):
         """Leave a voice channel."""
         if vc := interaction.guild.voice_client:
@@ -136,6 +142,19 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
             await interaction.response.send_message('\n'.join(f'• `{song}`' for song in vc.queue))
         else:
              await interaction.response.send_message(f"The queue is empty.")
+
+    ### CHECKS ###
+    def user_in_vc():
+        def check_user_in_vc(interaction: discord.Interaction) -> bool:
+            return interaction.user.voice is not None
+        return app_commands.check(check_user_in_vc)
+
+    def check_user_same_vc(interaction: discord.Interaction) -> bool:
+        pass
+
+    ### ERROR HANDLING ###
+    async def cog_app_command_error(self, interaction: Interaction, error: CheckFailure):
+        await interaction.response.send_message("You must be connected to a voice channel.")
 
 
 async def setup(bot: commands.Bot):
