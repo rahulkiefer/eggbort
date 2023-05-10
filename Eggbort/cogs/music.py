@@ -33,23 +33,23 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
         vc: CustomPlayer = interaction.guild.voice_client or await interaction.user.voice.channel.connect(cls=self.player, self_deaf=True)
 
         if query_or_link.startswith('https://www.youtube.com/playlist'):
-            await playYouTubePlaylist(interaction, self.player, query_or_link)
+            await self.playYouTubePlaylist(interaction, self.player, query_or_link)
         else:
             track = await wavelink.YouTubeTrack.search(query_or_link, return_first=True)
 
             if vc.queue.is_empty and not vc.is_playing():
                 await vc.play(track)
-                await interaction.response.send_message(f'Playing `{track.title}`.')
+                await interaction.response.send_message(f'Playing `{track.title}` by `{track.author}`.')
             else:
                 await vc.queue.put_wait(track)
-                await interaction.response.send_message(f'Added `{track.title}` to the queue...', delete_after=10)
+                await interaction.response.send_message(f'Added `{track.title}` by `{track.author}` to the queue.', delete_after=10)
 
     async def playYouTubePlaylist(self, interaction: discord.Interaction, vc: CustomPlayer, link: str):
         embed = discord.Embed(description="Searching", color=discord.Color.from_str("rgb(0,0,0)"))
-        await interaction.followup.send(embed=embed)
+        await interaction.respose.send_message(embed=embed)
         try:
-            embed = discord.Embed(description=f"[Playlist added to queue]({query})", color=discord.Color.from_str("rgb(0,0,0)"))
-            playlist = await wavelink.YouTubePlaylist.search(query)
+            embed = discord.Embed(description=f"[Playlist added to queue]({link})", color=discord.Color.from_str("rgb(0,0,0)"))
+            playlist = await wavelink.YouTubePlaylist.search(link)
             tracks: list[wavelink.YouTubeTrack] = playlist.tracks
             songs = len(tracks)
             length = sum(track.length for track in tracks)
@@ -74,7 +74,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
             embed.set_footer(text=f"Playlist Duration: {duration}")
             await interaction.edit_original_response(embed=embed)
         except Exception:
-            embed = discord.Embed(description=f"{query} is an invalid link/playlist!", color=discord.Color.red())
+            embed = discord.Embed(description=f"{link} is an invalid link/playlist!", color=discord.Color.red())
             await interaction.edit_original_response(embed=embed)
 
     @app_commands.command(name='pause', description="Pause the player") # TODO can I delete the message after playing is resumed?
