@@ -20,6 +20,18 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
         self.bot = bot
         self.player = CustomPlayer()
 
+    ### CHECKS ###
+
+    def user_in_vc():
+        def check_user_in_vc(interaction: discord.Interaction) -> bool:
+            return interaction.user.voice is not None
+        return app_commands.check(check_user_in_vc)
+
+    def check_user_same_vc(interaction: discord.Interaction) -> bool:
+        pass
+
+    ### COMMANDS ###
+
     @app_commands.command(name='play', description="Play a song")
     @app_commands.checks.has_permissions(speak=True)
     @user_in_vc()
@@ -108,8 +120,8 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
     async def skip(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if not vc.queue.is_empty:
-            await interaction.response.send_message(f"Skipped. Now playing: `{vc.queue.get()}`.")
             await vc.stop()
+            await interaction.response.send_message(f"Skipped. Now playing: `{vc.current.title}` by `{vc.current.author}`.")
 
     @app_commands.command(name='stop', description="Stops playing and clears queue")
     @app_commands.checks.has_permissions(speak=True)
@@ -143,18 +155,9 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
         else:
              await interaction.response.send_message(f"The queue is empty.")
 
-    ### CHECKS ###
-    def user_in_vc():
-        def check_user_in_vc(interaction: discord.Interaction) -> bool:
-            return interaction.user.voice is not None
-        return app_commands.check(check_user_in_vc)
-
-    def check_user_same_vc(interaction: discord.Interaction) -> bool:
-        pass
-
     ### ERROR HANDLING ###
-    async def cog_app_command_error(self, interaction: Interaction, error: CheckFailure):
-        await interaction.response.send_message("You must be connected to a voice channel.")
+    async def cog_app_command_error(self, interaction: discord.Interaction, error: app_commands.CheckFailure):
+        await interaction.response.send_message("You must be connected to a voice channel.", ephemeral=True, delete_after=5)
 
 
 async def setup(bot: commands.Bot):
