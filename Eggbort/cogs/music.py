@@ -41,8 +41,6 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
         If not connected, connect to our voice channel. If a YouTube playlist 
         link is specified, queues all tracks in the playlist.
         """
-        if interaction.user.voice is None:
-            return await interaction.response.send_message("You are not in a voice channel.", ephemeral=True, delete_after=5)
         vc: CustomPlayer = interaction.guild.voice_client or await interaction.user.voice.channel.connect(cls=self.player, self_deaf=True)
 
         if query_or_link.startswith('https://www.youtube.com/playlist'):
@@ -122,6 +120,8 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
         if not vc.queue.is_empty:
             await vc.stop()
             await interaction.response.send_message(f"Skipped. Now playing: `{vc.current.title}` by `{vc.current.author}`.")
+        else:
+            await interaction.response.send_message(f"No songs in queue.")
 
     @app_commands.command(name='stop', description="Stops playing and clears queue")
     @app_commands.checks.has_permissions(speak=True)
@@ -129,7 +129,7 @@ class Music(commands.Cog):  # TODO add functionality for Spotify and Soundcloud 
     async def stop(self, interaction: discord.Interaction):
         vc: CustomPlayer = interaction.guild.voice_client
         if not vc.queue.is_empty:
-            vc.queue.clear()
+            await vc.queue.clear()
         if vc.is_playing():
             await vc.stop()
             await interaction.response.send_message("Stopped player.")
