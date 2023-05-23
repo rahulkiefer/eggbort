@@ -16,7 +16,7 @@ multidict==6.0.4
 platformdirs==3.4.0
 pycparser==2.21
 PyNaCl==1.5.0
-requests==2.30.0
+requests==2.31.0
 tomlkit==0.11.7
 typing_extensions==4.5.0
 urllib3==2.0.2
